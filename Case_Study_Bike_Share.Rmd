@@ -176,8 +176,10 @@ Formating of the start and end times of each ride because the columns are writte
 
 ```{r format of start and end times, echo=TRUE, eval=TRUE}
 
-all_trips$started_at <- format(all_trips$started_at, format = "%Y-%m-%d %H:%M:%OS")
-all_trips$ended_at <- format(all_trips$ended_at, format = "%Y-%m-%d %H:%M:%OS")
+all_trips$started_at <- format(all_trips$started_at,
+                               format = "%Y-%m-%d %H:%M:%OS")
+all_trips$ended_at <- format(all_trips$ended_at,
+                             format = "%Y-%m-%d %H:%M:%OS")
 
 ```
 
@@ -185,8 +187,10 @@ Converting character vecctors to POSIXct.
 
 ```{r converting to date/time format, echo=TRUE, eval=TRUE}
 
-all_trips$started_at <- as.POSIXct(all_trips$started_at, format = "%Y-%m-%d %H:%M:%OS")
-all_trips$ended_at <- as.POSIXct(all_trips$ended_at, format = "%Y-%m-%d %H:%M:%OS")
+all_trips$started_at <- as.POSIXct(all_trips$started_at,
+                                   format = "%Y-%m-%d %H:%M:%OS")
+all_trips$ended_at <- as.POSIXct(all_trips$ended_at,
+                                 format = "%Y-%m-%d %H:%M:%OS")
 
 ```
 
@@ -194,7 +198,8 @@ Adding a ride_length calculation to all_trips in seconds.
 
 ```{r ride_length in seconds, echo=TRUE, eval=TRUE}
 
-all_trips$ride_length <- difftime(all_trips$ended_at,all_trips$started_at, units = "secs")
+all_trips$ride_length <- difftime(all_trips$ended_at,all_trips$started_at,
+                                  units = "secs")
 
 ```
 
@@ -245,7 +250,8 @@ aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = median)
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = min)
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = max) 
 
-aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean) # the average ride time by each day for members vs casual users
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual +
+            all_trips_v2$day_of_week, FUN = mean) # the average ride time by each day for members vs casual users
 
 ```
 
@@ -253,8 +259,10 @@ The aggregated data by day doesnt show the days starting from Monday to Sunday s
 
 ```{r cahnge of week day sequence, echo=TRUE, eval=TRUE}
 
-all_trips_v2$day_of_week <- ordered(all_trips_v2$day_of_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
-aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
+all_trips_v2$day_of_week <- ordered(all_trips_v2$day_of_week,
+                                    levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual +
+            all_trips_v2$day_of_week, FUN = mean)
 
 ```
 
